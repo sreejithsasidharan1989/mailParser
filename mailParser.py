@@ -10,6 +10,15 @@ localDomains = []
 localMailArray = {}
 remoteMailArray = {}
 domain=''
+args = sys.argv[1:]
+if len(args) == 0:
+    file = "/var/log/send/current"
+else:
+    if len(args) > 1:
+        print("Command Usage: ~/mailParser.py /var/log/send/filename")
+        sys.exit()
+    else:
+        file = args[0]
 
 def localDomain():
     localDomain = []
@@ -47,7 +56,7 @@ def vhostDomain():
     line.close
     return vhostDomain
             
-logFile = open("/var/log/send/current",'r')
+logFile = open(file,'r')
 vDomain = localDomain()
 vhostDomain = vhostDomain()
 for line in logFile:
