@@ -1,10 +1,13 @@
 #!/bin/python3
 
+#import modules
 import re
 import os
 import socket
 import sys
+import posixpath
 
+##global variables
 remoteDomains = []
 localDomains = []
 localMailArray = {}
@@ -12,10 +15,12 @@ remoteMailArray = {}
 domain=''
 mailArray = {}
 args = sys.argv[1:]
-        
+
+#sort function
 def getHits(t):
     return t[1]
 
+#check for domain name in virtualdomains
 def localDomain():
     localDomain = []
     vDomain = open("/var/qmail/control/virtualdomains","r")
@@ -23,7 +28,8 @@ def localDomain():
         localDomain.append(domain.split(":")[0])
     return localDomain
     vDomain.close()
-    
+
+#check for domain name in vhost files
 def vhostDomain():
     absPath=''
     domain=''
@@ -52,6 +58,7 @@ def vhostDomain():
     line.close
     return vhostDomain
 
+#track mail activity
 def mailTracker(mailId):
     import subprocess
     domain = vhostDomain()
@@ -111,6 +118,7 @@ def mailTracker(mailId):
     if os.path.exists("mail_log.txt"):
        os.remove("mail_log.txt")
 
+#count number of emails
 def logParser(file):
     domain=''
     vhostDom=''
