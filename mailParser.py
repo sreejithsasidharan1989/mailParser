@@ -75,13 +75,6 @@ def mailTracker(mailId):
                 match = re.search("\d+: ",line)
                 msg_id = match.group().rstrip(':')
                 match = re.search("\<.+>", line)
-#                mailbox = match.group().strip('<>').split('@')[0]
-#                if re.search("[A-Za-z0-9\-\_\.]+\@[a-z.-]*", mailbox):
-#                    status = checkDomain(mailbox)
-#                    if status == 1:
-#                        sender = match.group().strip('<>')
-#                    else:
-#                        sender = match.group().strip('<>').split('@')[1]
                 sender = match.group().strip('<>')
                 match = re.search("[A-Za-z0-9\-\_\.]+\@[a-z.-]*", nline)
                 receiver = match.group()
@@ -100,15 +93,12 @@ def mailTracker(mailId):
 
         except:
               continue
-#    print(mailArray)
-#    sys.exit()
 
     print("+--------------------+-----------------------------------------+------------------------------+--------------+")
     print("|   Date             |        Sender                           |          Receiver            |   Direction  |")
     print("+--------------------+-----------------------------------------+------------------------------+--------------+")
     for ids in mailArray:
          key = len(mailArray[ids].keys())
-#         print(key)
          key = key - 1
          for num in range(key, -1, -1):
             date = mailArray[ids][num]["Date"]
@@ -129,7 +119,7 @@ def logParser(file):
     vDomain = localDomain()
     vhostDom = vhostDomain()
     for line in logFile:
-        if "from" in line:
+        if "from <" in line:
             match = re.search("\<.+>", line)
             if match is not None:
                 domain = match.group().strip('<>').split('@')[1]
