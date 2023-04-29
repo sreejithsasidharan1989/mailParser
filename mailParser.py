@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 
 #import modules
 import re
@@ -120,13 +120,13 @@ def mailTracker(mailId):
 
 #count number of emails
 def logParser(file):
-    domain=''
     vhostDom=''
-    sender=''
     logFile = open(file,'r')
     vDomain = localDomain()
     vhostDom = vhostDomain()
     for line in logFile:
+        domain=''
+        sender=''
         if "from <" in line:
             match = re.search("\<.+>", line)
             if match is not None:
