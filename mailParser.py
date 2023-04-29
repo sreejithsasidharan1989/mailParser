@@ -100,10 +100,9 @@ def mailTracker(mailId):
 
         except:
               continue
-
-    print("+--------------------+-----------------------------------------+------------------------------+--------------+")
-    print("|   Date             |        Sender                           |          Receiver            |   Direction  |")
-    print("+--------------------+-----------------------------------------+------------------------------+--------------+")
+    print("+--------------------+-----------------------------------------+-----------------------------------------+--------------+")
+    print("|   Date             |        Sender                           |          Receiver                       |   Direction  |")
+    print("+--------------------+-----------------------------------------+-----------------------------------------+--------------+")
     for ids in mailArray:
          key = len(mailArray[ids].keys())
          key = key - 1
@@ -113,20 +112,21 @@ def mailTracker(mailId):
             receiver = mailArray[ids][num]["Receiver"]
             direction = mailArray[ids][num]["Direction"]
             if mailId in sender:
-               print("|{:15} | {:40}| {:29}| {:12} |".format(date,sender,receiver,direction))
-    print("+--------------------+-----------------------------------------+------------------------------+--------------+") 
+               print("|{:15} | {:40}| {:40}| {:12} |".format(date,sender,receiver,direction))
+    print("+--------------------+-----------------------------------------+-----------------------------------------+--------------+")
+
     if os.path.exists("mail_log.txt"):
        os.remove("mail_log.txt")
 
 #count number of emails
 def logParser(file):
-    domain=''
     vhostDom=''
-    sender=''
     logFile = open(file,'r')
     vDomain = localDomain()
     vhostDom = vhostDomain()
     for line in logFile:
+        domain=''
+        sender=''
         if "from <" in line:
             match = re.search("\<.+>", line)
             if match is not None:
