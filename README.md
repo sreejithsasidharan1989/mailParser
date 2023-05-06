@@ -27,11 +27,13 @@ I wanted to share a Python script I’ve been working on with all of you. As you
 +--------------------------------------------------------------------+------------+
 ```
 ###### 1. You can also run the script by passing a specific log file name as an argument
+#
 ```
 mailParser.py /var/log/send/@4000000063cb769e3358478c.s
 ```
 
 ###### 2. The scripts also accepts email address as a valid argument and track it from the current mail log file
+#
 ```
 mailParser.py test@example.com
 +--------------------+-----------------------------------------+------------------------------+--------------+
@@ -45,11 +47,19 @@ mailParser.py test@example.com
 ```
 
 ###### 3.  The script can take only one argument at a time, if you specificy no arguments at all the it will use the log file /var/log/send/current by default.
-
+#
 ###### 4. If there are more than one arguments, the script just terminates with following message
+#
 ```
 mailParser.py /var/log/send/@4000000063cb769e3358478c.s test@example.com
 Command Usage: mailParser </var/log/send/<filename>
 ```
 
 ###### 5. It is also worth to note that, if the specified file path is incorrect or the mailbox format is flawed., please expect the script to bail out
+#
+#
+
+#### Upcoming Feature
+The output of the email track function will indicate whether the email was successfully received by the target recipient in a future update release of this script.
+
+

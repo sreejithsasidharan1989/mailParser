@@ -51,7 +51,7 @@ def vhostDomain():
             if 'ServerName' in item or 'ServerAlias' in item:
                 match = item.split()
                 for domain in match:
-                    if domain not in vhostDomain and domain.count('.') <= 2 and domain.count('.') >= 1 and domain.startswith('www.') is False and domain.startswith('ftp.') is False and domain.startswith('mail.') is False and domain.startswith('eadn-') is False:
+                    if domain not in vhostDomain and domain.count('.') <= 2 and domain.count('.') >= 1 and not domain.startswith(('www.', 'ftp.', 'mail.', 'eadn-')):
                         vhostDomain.append(domain)
     line.close
     return vhostDomain
